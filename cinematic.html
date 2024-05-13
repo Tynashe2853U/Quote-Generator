@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote with Cinematic Image</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="quote-container">
+        <div class="quote-box">
+            <p id="quote"> Quote goes here! </p>
+            <small id = "author"></small>
+        </div>
+     <!--  <img id="cinematic-image" src="" alt="Cinematic Image">
+        <p id="quote-text"></p>--> 
+        <button id="btn">New Quote</button>
+        <button id="dark-mode-toggle">Dark Mode</button>
+        <script>
+            const quote = document.querySelector("#quote");
+            const author = document.querySelector("#author");
+            const btn = document.querySelector("#btn");
+            const darkModeToggle = document.querySelector("#dark-mode-toggle");
+            const quoteContainer = document.querySelector("#quote-container");
+
+            //btn.addEventListener("click", getQuote);
+            btn.addEventListener("click", getQuote);
+            darkModeToggle.addEventListener("click", toggleDarkMode);
+            function getQuote() {
+                fetch("https://api.quotable.io/random")
+                .then(res => res.json())
+                .then(data => {
+                    quote.innerHTML = `${data.content}`;
+                    author.innerHTML = data.author
+                })
+            }
+            function toggleDarkMode() {
+                const body = document.querySelector("body");
+                body.classList.toggle("dark-mode");
+                if (body.classList.contains("dark-mode")) {
+                darkModeToggle.textContent = "Light Mode";
+                } else {
+                darkModeToggle.textContent = "Dark Mode";
+                }
+            }
+        </script>   
+    </div>
+    
+</body>
+</html>
